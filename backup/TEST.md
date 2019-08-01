@@ -1,6 +1,4 @@
 
-
-
 #nginx 作用
 反向代理
 cache
@@ -9,7 +7,8 @@ lua扩展等
 
 #安装与使用
 MAC系统一个工具 homebrew
- 默认路径   /usr/local/etc/nginx
+默认路径   /usr/local/etc/nginx
+WIN 系统下载后是一个压缩包解压后就直接运行nginx.exe就启动了
 
 
 ## 使用nginx 常用命令
@@ -33,6 +32,97 @@ ps aux | grep nginx；
 /usr/local/nginx/sbin/nginx；
 
 
+
+nginx的配置
+
+include 某个配置文件吗相当于吧配置文件合并一起，只是形式上在多个文件里而已
+servername hostname
+location /
+
+c:\windows\system32\drivers\etc
+
+代理缓存的头
+
+
+https
+私钥--服务器上--解密用
+公钥--
+握手的时候传输
+加密字符串
+
+
+curl -v
+curl -v -k 用 h2
+curl -v --http1.1
+
+自动兼容
+
+
+chrome://net-internals
+https://http2.akamai.com/demo/http2-lab.html
+
+随机数、支持加密套件 cipher suite
+随机数、证书
+主密钥
+
+
+1 客户端想服务端发送随机数+加密套件  cipher suite, 服务端会选一个
+2 服务端想客户端发送随机字符串+ 证书（公钥）
+3公钥 到 预主密钥 ，预主密钥
+中间人无法拿不到加密字符串
+解密
+
+
+[证书生成命令](https://gist.github.com/Jokcy/5e73fd6b2a9b21c142ba2b1995150808)
+
+
+openssl req -x509 -newkey rsa:1024 -keyout key.pem -out req.pem 
+openssl req -x509 -newkey rsa:2048 -nodes -sha256 -keyout  test-privkey.pem -out  test-cert.pem 
+
+server{
+ #SPDI
+ listen 443 http2;
+ server_name test.com;
+ http2_push_preload on;
+ ssl on;
+
+}
+
+
+server{
+  listen 80;
+  server_name arc.com;
+  location /{
+  # 默认 这个代理的ip会在后端拿到，而不是客户端的host，（转发者是nginx，nginx重新发起了一个请求，后端拿到的是nginx的host是符合逻辑的）如果想在后端拿到客户端的host则加配置：proxy_set_header Host $host;
+    proxy_pass http://127.0.0.1:8002;
+    #用于把客户请求头 传递到后端： 代理服务器修改请求头
+    proxy_set_header Host $host;
+
+  }
+}
+
+
+
+http2
+信道复用
+分帧发送 并发发送请求
+
+Server Push 服务端主动推送
+
+http 原理
+tcp 链接 三次链接
+https 握手
+长连接
+
+
+http技术点 cache  etag csp 网页内容安全性 可用性
+
+
+nginx实践
+
+
+一个连就能复用
+并发连接数限制
 
 
 //删除文件
@@ -63,11 +153,23 @@ proxy_set_header
 
  
 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 PS：Nginx使用有两三年了，现在经常碰到有新用户问一些很基本的问题，我也没时间一一回答，今天下午花了点时间，结合自己的使用经验，把Nginx的主要配置参数说明分享一下，也参考了一些网络的内容，这篇是目前最完整的Nginx配置参数中文说明了。更详细的模块参数请参考：http://wiki.nginx.org/Main
-
- 
-
- 
 
 #定义Nginx运行的用户和用户组
 

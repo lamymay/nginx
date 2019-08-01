@@ -1,7 +1,7 @@
 var http = require('http');
 
 http.createServer(function (request, response) {
-    console.log('----- request come', request.headers.host);
+    console.log('----- request come', request.headers.host + new Date());
 
 
     // 发送 HTTP 头部

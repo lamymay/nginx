@@ -1,24 +1,5 @@
-2019/07/22 23:34:49 [error] 12108#8596: *1 CreateFile() "T:\P\nginx\nginx-1.14.2/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "abc.com", referrer: "http://abc.com/"
-2019/07/22 23:35:44 [error] 12108#8596: *5 CreateFile() "T:\P\nginx\nginx-1.14.2/html/test/v1" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /test/v1 HTTP/1.1", host: "abc.com"
-2019/07/22 23:35:53 [error] 12108#8596: *5 "T:\P\nginx\nginx-1.14.2/html/test/v1/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /test/v1/ HTTP/1.1", host: "abc.com"
-2019/07/22 23:42:53 [error] 10988#11612: *5 CreateFile() "T:\P\nginx\nginx-1.14.2/html/css/index.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /css/index.css HTTP/1.1", host: "abc.com", referrer: "http://abc.com/arc/"
-2019/07/22 23:42:53 [error] 10988#11612: *6 CreateFile() "T:\P\nginx\nginx-1.14.2/html/js/index.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /js/index.js HTTP/1.1", host: "abc.com", referrer: "http://abc.com/arc/"
-2019/07/22 23:42:58 [error] 10988#11612: *6 CreateFile() "T:\P\nginx\nginx-1.14.2/html/css/index.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /css/index.css HTTP/1.1", host: "abc.com", referrer: "http://abc.com/arc/"
-2019/07/22 23:43:01 [error] 10988#11612: *6 CreateFile() "T:\P\nginx\nginx-1.14.2/html/css/index.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /css/index.css HTTP/1.1", host: "abc.com", referrer: "http://abc.com/arc/"
-2019/07/22 23:43:01 [error] 10988#11612: *5 CreateFile() "T:\P\nginx\nginx-1.14.2/html/js/index.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /js/index.js HTTP/1.1", host: "abc.com", referrer: "http://abc.com/arc/"
-2019/07/22 23:43:02 [error] 10988#11612: *5 CreateFile() "T:\P\nginx\nginx-1.14.2/html/css/index.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /css/index.css HTTP/1.1", host: "abc.com", referrer: "http://abc.com/arc/"
-2019/07/22 23:43:02 [error] 10988#11612: *6 CreateFile() "T:\P\nginx\nginx-1.14.2/html/js/index.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /js/index.js HTTP/1.1", host: "abc.com", referrer: "http://abc.com/arc/"
-2019/07/22 23:43:33 [error] 10988#11612: *6 CreateFile() "T:\P\nginx\nginx-1.14.2/html/css/index.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /css/index.css HTTP/1.1", host: "abc.com", referrer: "http://abc.com/arc"
-2019/07/22 23:43:33 [error] 10988#11612: *5 CreateFile() "T:\P\nginx\nginx-1.14.2/html/js/index.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /js/index.js HTTP/1.1", host: "abc.com", referrer: "http://abc.com/arc"
-2019/07/22 23:45:17 [emerg] 10024#3592: unknown log format "main" in T:\P\nginx\nginx-1.14.2/conf/nginx.conf:56
-2019/07/22 23:47:34 [emerg] 6024#14732: unknown log format "main" in T:\P\nginx\nginx-1.14.2/conf/nginx.conf:56
-2019/07/30 16:50:21 [error] 3052#4992: *1 CreateFile() "T:\P\nginx\nginx-1.14.2/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: arc.com, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
-2019/07/30 17:02:56 [error] 3052#4992: *8 CreateFile() "T:\P\nginx\nginx-1.14.2/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: arc.com, request: "GET /favicon.ico HTTP/1.1", host: "arc.com", referrer: "http://arc.com/"
-2019/07/30 17:06:44 [notice] 10684#9236: signal process started
-2019/07/30 17:08:36 [emerg] 9640#6112: "worker_processes" directive is not allowed here in T:\P\nginx\nginx-1.14.2/conf/test1_nginx.conf:3
-2019/07/30 17:08:59 [emerg] 10712#9688: CreateFile() "T:/test1_nginx.conf" failed (2: The system cannot find the file specified) in T:\P\nginx\nginx-1.14.2/conf/nginx.conf:19
-2019/07/30 17:09:11 [emerg] 9556#1396: CreateFile() "T:/test1_nginx.conf" failed (2: The system cannot find the file specified) in T:\P\nginx\nginx-1.14.2/conf/nginx.conf:19
-2019/07/30 17:09:33 [emerg] 10320#10596: CreateFile() "T:/test1_nginx.conf" failed (2: The system cannot find the file specified) in T:\P\nginx\nginx-1.14.2/conf/nginx.conf:19
-2019/07/30 17:09:54 [emerg] 9916#6340: "worker_processes" directive is not allowed here in T:\P\nginx\nginx-1.14.2/conf/test1_nginx.conf:3
-2019/07/30 17:10:24 [notice] 3384#10628: signal process started
-2019/07/30 17:10:24 [error] 3384#10628: OpenEvent("Global\ngx_reload_1608") failed (2: The system cannot find the file specified)
+2019/08/01 17:08:36 [emerg] 6336#10492: bind() to 0.0.0.0:443 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
+2019/08/01 17:19:22 [error] 15380#14796: *1 CreateFile() "T:\P\nginx\nginx-1.14.2/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "test.com", referrer: "http://test.com/"
+2019/08/01 17:38:47 [notice] 15712#9228: signal process started
+2019/08/01 17:38:56 [notice] 9652#11596: signal process started
+2019/08/01 17:44:52 [notice] 15596#13056: signal process started

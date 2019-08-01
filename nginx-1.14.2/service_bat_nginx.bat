@@ -1,26 +1,27 @@
 cls 
-@ECHO OFF 
+@ECHO OFF
+chcp 65001
 SET NGINX_PATH=T:\P\nginx\nginx-1.14.2\ 
 SET NGINX_DIR=T:\P\nginx\nginx-1.14.2\ 
 color 0a 
-TITLE Nginx ¹ÜÀí³ÌÐò Power By ChenJianxiang 
+TITLE Nginx ç®¡ç†ç¨‹åº Power By ChenJianxiang 
 GOTO MENU 
 :MENU 
 CLS 
 ECHO. 
-ECHO. * * * *  Nginx ¹ÜÀí³ÌÐò Power By ChenJianxiang  * * *  
+ECHO. * * * *  Nginx ç®¡ç†ç¨‹åº Power By ChenJianxiang  * * *  
 ECHO. * * 
-ECHO. * 1 Æô¶¯Nginx * 
+ECHO. * 1 å¯åŠ¨Nginx * 
 ECHO. * * 
-ECHO. * 2 ¹Ø±ÕNginx * 
+ECHO. * 2 å…³é—­Nginx * 
 ECHO. * * 
-ECHO. * 3 ÖØÆôNginx * 
+ECHO. * 3 é‡å¯Nginx * 
 ECHO. * * 
-ECHO. * 4 ÍË ³ö * 
+ECHO. * 4 é€€ å‡º * 
 ECHO. * * 
 ECHO. * * * * * * * * * * * * * * * * * * * * * * * * 
 ECHO. 
-ECHO.ÇëÊäÈëÑ¡ÔñÏîÄ¿µÄÐòºÅ£º 
+ECHO.è¯·è¾“å…¥é€‰æ‹©é¡¹ç›®çš„åºå·ï¼š 
 set /p ID= 
 IF "%id%"=="1" GOTO cmd1 
 IF "%id%"=="2" GOTO cmd2 
@@ -29,8 +30,8 @@ IF "%id%"=="4" EXIT
 PAUSE 
 :cmd1 
 ECHO. 
-ECHO.Æô¶¯Nginx...... 
-IF NOT EXIST %NGINX_DIR%nginx.exe ECHO %NGINX_DIR%nginx.exe²»´æÔÚ 
+ECHO.å¯åŠ¨Nginx...... 
+IF NOT EXIST %NGINX_DIR%nginx.exe ECHO %NGINX_DIR%nginx.exeä¸å­˜åœ¨ 
 %NGINX_PATH% 
 cd %NGINX_DIR% 
 IF EXIST %NGINX_DIR%nginx.exe start %NGINX_DIR%nginx.exe 
@@ -39,14 +40,14 @@ PAUSE
 GOTO MENU 
 :cmd2 
 ECHO. 
-ECHO.¹Ø±ÕNginx...... 
+ECHO.å…³é—­Nginx...... 
 taskkill /F /IM nginx.exe > nul 
 ECHO.OK 
 PAUSE 
 GOTO MENU 
 :cmd3 
 ECHO. 
-ECHO.¹Ø±ÕNginx...... 
+ECHO.å…³é—­Nginx...... 
 taskkill /F /IM nginx.exe > nul 
 ECHO.OK 
 GOTO cmd1 
