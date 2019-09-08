@@ -1,0 +1,96 @@
+
+
+proxy_cache_path  /home/nginx/proxy_cache/cache levels=1:2 keys_zone=proxycache:60m max_size=120m inactive=2h use_temp_path=on;
+proxy_temp_path    /home/nginx/proxy_cache/temp;
+proxy_cache_key    $host$request_uri;
+
+.
+
+proxy_cache_path
+
+/home/nginx/proxy_cache/cache：定义 proxy_cache 生成文件的根路径
+levels：默认所有缓存文件都放在上面指定的根路径中，从而可能影响缓存的性能。推荐指定为 2 级目录来存储缓存文件
+key_zone：这个的值是字符串，可以随意写。用于在共享内存中定义一块存储区域来存放缓存的 key 和 metadata（类似于使用次数），这样 nginx 可以快速判断一个 request 是否命中缓存。1m 可以存储 8000 个key
+max_size：最大 cache 空间。如果不指定，会使用掉所有 disk space。当达到 disk 上限后，会删除最少使用的 cache
+inactive：内存中缓存的过期检查周期。示例配置中如果 2h 内都没有被访问，则不论状态是否为 expired，都会清除缓存。需要注意的是，inactive 和 expired 配置项的含义是不同的，expired 只是判断过期时间，不会删除缓存；而 inactive 是直接删除过期缓存
+use_temp_path：如果为 off，则 nginx 会将缓存文件直接写入指定的 cache 文件中，而不使用 temp_path 指定的临时存储路径
+proxy_temp_path
+
+/home/nginx/proxy_cache/temp：定义 proxy_cache 生成临时文件的根路径。此项在 use_temp_path=off 时不需填写
+proxy_cache_key
+
+$host$request_uri：定义 proxy_cache 生成文件的名称。值可以为 Nginx 支持的变量和字符串
+
+
+
+server 段
+
+同样以本站配置为例进行说明：
+
+proxy_cache          proxycache;
+proxy_cache_valid      304 2h;
+proxy_cache_valid      403 444 24h;
+proxy_cache_valid      404 2h;
+proxy_cache_valid      500 502 2h;
+proxy_cache_use_stale    invalid_header http_403 http_404 http_500 http_502;
+proxy_cache_lock      on;
+proxy_cache_lock_timeout  5s;
+proxy_no_cache        $proxynocache_atomxml $proxynocache_sitemapxml;
+proxy_cache：对应 http 段的 key_zone，是你定义的 proxy_cache 所使用的共享空间的名称。我在上面示例中使用的名称是“proxycache”
+proxy_cache_valid：对指定的 HTTP 状态进行缓存，并指定缓存时间。可以自定义写入多个配置项
+proxy_cache_stale：这个可以大大减少回源次数。因此可以将 inactive 适当延长
+proxy_cache_lock：同样是减少回源次数。和上面的差别在于缓存是否存在
+proxy_no_cache：值为若干个变量($string)，这个变量的值只有俩类，0 和 非0，这若干个变量中只要有一个值不为 0，就不会触发缓存
+我的一点经验
+
+会在你指定的缓存路径下生成类似 “0 1 2 3 4 5 6 7 8 9 a b c d e f …” 这样的文件夹（当 levels=2 时），这些文件夹下存储着写入硬盘的缓存文件
+proxy_cache_valid 缓存的状态码需要根据你的需要来定义，千万别把 200 写进去了
+inactive 时间和 valid 时间需要特别注意，如果源站更新频率不怎么低，就需要根据你的需求减少这些值
+proxy_no_cache 中使用的 $string 是通过类似 “set $string 1;” 来定义的
+proxy_cache_use_stale 和 proxy_cache_lock 的用法目前我也没太明白，所以解释得不太清晰，望见谅。这俩配置一般不使用也无妨
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ser@localhost ~]$ ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:0c:29:c1:cb:da brd ff:ff:ff:ff:ff:ff
+    inet 192.168.221.129/24 brd 192.168.221.255 scope global noprefixroute dynamic ens33
+       valid_lft 1652sec preferred_lft 1652sec
+    inet6 fe80::ac5c:8f5e:f072:781b/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: virbr0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether 52:54:00:4d:7a:a4 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
+       valid_lft forever preferred_lft forever
+4: virbr0-nic: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000
+    link/ether 52:54:00:4d:7a:a4 brd ff:ff:ff:ff:ff:ff
+5: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 02:42:87:39:f8:70 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 scope global docker0
+       valid_lft forever preferred_lft forever
+

@@ -1,0 +1,21 @@
+bind() to 0.0.0.0:443 failed (10013: An attempt was made to access a socket in a way forbidden by it
+2014年11月26日 17:12:31 hukang00 阅读数 16129 文章标签： nginx 更多
+分类专栏： nginx
+版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+本文链接：https://blog.csdn.net/hukang00/article/details/41518659
+1. 启动 nginx 报错：bind() to 0.0.0.0:443 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions
+
+
+
+2.这是由于其他进程占用了nginx 的端口。
+
+
+
+3. 解决办法：
+
+运行 cmd, 输入netstat -aon|findstr "443"
+
+
+
+找到 0.0.0.0:443，找到 PID，在任务管理器结束进程。 vmware-hostd.exe
+

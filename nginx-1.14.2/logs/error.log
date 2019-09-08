@@ -1,5 +1,0 @@
-2019/08/01 17:08:36 [emerg] 6336#10492: bind() to 0.0.0.0:443 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
-2019/08/01 17:19:22 [error] 15380#14796: *1 CreateFile() "T:\P\nginx\nginx-1.14.2/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "test.com", referrer: "http://test.com/"
-2019/08/01 17:38:47 [notice] 15712#9228: signal process started
-2019/08/01 17:38:56 [notice] 9652#11596: signal process started
-2019/08/01 17:44:52 [notice] 15596#13056: signal process started
