@@ -1,13 +1,13 @@
+### IntelliJ IDEA ###
 #/target/
 target/
 *.bak
-*.log
 !.mvn/wrapper/maven-wrapper.jar
 
-### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
 *.log
+/nginx1_14_2/logs/
 *.pid
